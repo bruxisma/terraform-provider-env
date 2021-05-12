@@ -1,29 +1,29 @@
 package env
 
 import (
-	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 const testDataSourceVariable = `
 data "env_variable" "path" {
-  variable = "PATH"
+  variable = "TERRAFORM_PROVIDER_ENV"
 }
 `
 
 func TestDataSourceVariable(t *testing.T) {
 	resource.UnitTest(t, resource.TestCase{
-		ProviderFactories: map[string]func() (*schema.Provider, error){
-			"env": func() (*schema.Provider, error) { return Provider(), nil },
-		},
+		ProviderFactories: providerFactories,
+		IsUnitTest:        true,
+		PreCheck:          func() { testPreCheck(t) },
 		Steps: []resource.TestStep{
 			{
 				Config: testDataSourceVariable,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestMatchResourceAttr("data.env_variable.path", "variable", regexp.MustCompile("^.+"))),
+					resource.TestCheckResourceAttr("data.env_variable.path", "exists", "true"),
+					resource.TestCheckResourceAttr("data.env_variable.path", "value", testPaths),
+					resource.TestCheckResourceAttrSet("data.env_variable.path", "id")),
 			},
 		},
 	})
