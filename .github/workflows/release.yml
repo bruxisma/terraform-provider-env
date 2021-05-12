@@ -23,9 +23,11 @@ jobs:
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
-          args: release --rm-dist
+          args: >-
+            release
+            --config ${{github.workspace}}/.github/goreleaser.yml
+            --rm-dist
         env:
           GPG_FINGERPRINT: ${{ steps.gpg.outputs.fingerprint }}
           GITHUB_TOKEN: ${{ github.token }}
-
 

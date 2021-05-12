@@ -61,7 +61,17 @@ jobs:
       - name: Update Dependencies
         run: go mod download
       - name: Terraform Acceptance Tests
-        run: go test -v -cover ${{github.workspace}}/env
+        run: >-
+          go test -v
+          -race
+          -coverprofile=coverage.out
+          -covermode=atomic
+          -cover ${{github.workspace}}/env
         env:
           TF_ACC_TERRAFORM_VERSION: ${{ matrix.terraform }}
           TF_ACC: 1
+      - name: Upload Code Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          verbose: true
+          files: ${{ github.workspace }}/coverage.out
