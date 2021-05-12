@@ -1,5 +1,7 @@
 # Terraform Provider for Environment Variables
 
+[![Tests][test-badge]][test-link]
+
 This terraform provider allows you to read environment variables (either as
 strings or as a list of paths) from your local machine.
 
@@ -11,3 +13,5 @@ It is meant entirely for debugging/configuration purposes.
 -	[Terraform](https://www.terraform.io/downloads.html) 0.15.x
 -	[Go](https://golang.org/doc/install) 1.16.x (to build the provider plugin)
 
+[test-badge]: https://github.com/slurps-mad-rips/terraform-provider-env/actions/workflows/test.yml/badge.svg
+[test-link]: https://github.com/slurps-mad-rips/terraform-provider-env/actions/workflows/test.yml
