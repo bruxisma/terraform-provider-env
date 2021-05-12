@@ -61,11 +61,10 @@ jobs:
       - name: Update Dependencies
         run: go mod download
       - name: Terraform Acceptance Tests
-        shell: bash
         run: >-
           go test -v
           -race
-          -coverprofile=coverage.out
+          -coverprofile coverage.out
           -covermode=atomic
           -cover ${{github.workspace}}/env
         env:
