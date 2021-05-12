@@ -1,6 +1,7 @@
 # Terraform Provider for Environment Variables
 
 [![Tests][test-badge]][test-link] [![codecov][coverage-badge]][coverage-link]
+
 This terraform provider allows you to read environment variables (either as
 strings or as a list of paths) from your local machine.
 
