@@ -1,6 +1,7 @@
 package env
 
 import (
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
@@ -22,7 +23,7 @@ func TestDataSourceVariable(t *testing.T) {
 			{
 				Config: testDataSourceVariable,
 				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckOutput("data.env_variable.path", "variable")),
+					resource.TestMatchResourceAttr("data.env_variable.path", "variable", regexp.MustCompile("^.+"))),
 			},
 		},
 	})
