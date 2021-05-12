@@ -74,5 +74,6 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           fail_ci_if_error: true
+          directory: ${{ github.workspace }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ github.workspace }}/coverage.out
+          files: coverage.out
