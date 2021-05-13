@@ -2,10 +2,10 @@ name: Tests
 on:
   pull_request:
     paths-ignore:
-      - README.md
+      - '**.md'
   push:
     paths-ignore:
-      - README.md
+      - '**.md'
 jobs:
   build:
     name: Build
