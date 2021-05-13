@@ -45,9 +45,14 @@ func dataSourcePath() *schema.Resource {
 
 func dataSourcePathRead(ctx context.Context, data *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	value, exists := os.LookupEnv(data.Get("variable").(string))
+	paths := strings.Split(value, string(os.PathListSeparator))
 	hash := sha256.Sum256([]byte(value))
-	data.SetId(hex.EncodeToString(hash[:]))
-	data.Set("paths", strings.Split(value, string(os.PathListSeparator)))
+	id := hex.EncodeToString(hash[:])
+	if !exists {
+		paths = []string{}
+	}
+	data.SetId(id)
 	data.Set("exists", exists)
+	data.Set("paths", paths)
 	return nil
 }
