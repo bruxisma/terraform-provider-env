@@ -5,7 +5,7 @@
 This terraform provider allows you to read environment variables (either as
 strings or as a list of paths) from your local machine.
 
-Do not use this in multi-person (or even multi-system) deployment mechanisms.
+Do not use this in multi-person (or even multi-system) deployment environments.
 It is meant entirely for debugging/configuration purposes.
 
 ## Requirements
