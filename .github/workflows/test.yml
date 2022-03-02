@@ -71,7 +71,7 @@ jobs:
           TF_ACC_TERRAFORM_VERSION: ${{ matrix.terraform }}
           TF_ACC: 1
       - name: Upload Code Coverage
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@f32b3a3741e1053eb607407145bc9619351dc93b # tag=v2.1.0
         with:
           fail_ci_if_error: true
           directory: ${{ github.workspace }}
