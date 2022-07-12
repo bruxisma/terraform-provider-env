@@ -37,7 +37,9 @@ func TestDataSourcePath(t *testing.T) {
 				Config: testDataSourcePathMissing,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("data.env_path.path", "exists", "false"),
-					resource.TestCheckNoResourceAttr("data.env_path.path", "paths"),
+					resource.TestCheckNoResourceAttr("data.env_path.path", "paths.0"),
+					resource.TestCheckNoResourceAttr("data.env_path.path", "paths.1"),
+					resource.TestCheckNoResourceAttr("data.env_path.path", "paths.2"),
 					resource.TestCheckResourceAttrSet("data.env_path.path", "id")),
 			},
 		},
