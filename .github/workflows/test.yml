@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        terraform: ['0.15.3']
+        terraform: ['1.1.*', '1.2.*']
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout
@@ -49,6 +49,11 @@ jobs:
         uses: actions/setup-go@b22fbbc2921299758641fab08929b4ac52b32923 # tag=v3
         with:
           go-version: 1.16
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{matrix.terraform}}
+          terraform_wrapper: false
       - name: Find Module Cache Directory
         run: echo "::set-output name=dir::$(go env GOMODCACHE)"
         id: go-mod-cache
@@ -68,7 +73,6 @@ jobs:
           -covermode=atomic
           -cover ${{github.workspace}}/env
         env:
-          TF_ACC_TERRAFORM_VERSION: ${{ matrix.terraform }}
           TF_ACC: 1
       - name: Upload Code Coverage
         uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # tag=v3.1.0
