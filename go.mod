@@ -1,6 +1,6 @@
 module occult.work/terraform-provider-env
 
-go 1.16
+go 1.18
 
 require (
 	github.com/hashicorp/terraform-plugin-docs v0.13.0
